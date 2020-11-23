@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://kit.fontawesome.com/a8a4e25c3e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <h1>Currently in Atlanta</h1>
+            </div>
+            <div class="col-4-temp">
+              <h3>
+                <span id="temp"> 77</span>
+                <i class="fas fa-cloud-sun"></i>
+                <br />
+                <small class="hi-lo" id="im-hi-lo"> Hi 80°F | Lo 65°F </small>
+                <br />
+                <small class="hi-lo">
+                  <a href="" id="imperial">°F</a> |
+                  <a href="" id="metric">°C</a>
+                </small>
+              </h3>
+            </div>
+
+            <div class="col-4.15">
+              <form id="search-form">
+                <label> Search Location </label>
+                <div class="row">
+                  <div class="col">
+                    <input
+                      type="search"
+                      class="form-control"
+                      placeholder="Enter City"
+                      autofocus="on"
+                      autocomplete="off"
+                      id="city-input-value"
+                    />
+                  </div>
+                </div>
+                <input type="submit" class="btn btn-info" value="Search" />
+                <button
+                  type="button"
+                  class="btn btn-info current"
+                  id="current-location"
+                >
+                  Current Location
+                </button>
+              </form>
+            </div>
+            <br />
+
+            <div class="col-12">
+              <ul class="date-time">
+                <li id="current-date">Thursday, 10/22/2020</li>
+                <li id="current-time">8:00 PM</li>
+                <li>
+                  <small> Updated 5 minutes ago </small>
+                </li>
+                <hr />
+              </ul>
+              <p class="futureWeather" id="forecast">
+                <strong> Next Five Days in Atlanta </strong>
+              </p>
+            </div>
+            <div class="col-sm-4.75 fri">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Fri</h5>
+                  <p class="card-text">73° 🌤</p>
+                  <small class="low-temp"> 60° </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4.75 sat">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Sat</h5>
+                  <p class="card-text">78° 🌦</p>
+                  <small class="low-temp"> 64° </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4.75 sun">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Sun</h5>
+                  <p class="card-text">69° 🌧</p>
+                  <small class="low-temp"> 49° </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4.75 mon">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Mon</h5>
+                  <p class="card-text">70° 🌩</p>
+                  <small class="low-temp"> 49° </small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4.75 tue">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Tue</h5>
+                  <p class="card-text">71° ☀️</p>
+                  <small class="low-temp"> 55° </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="src/script.js"></script>
+  </body>
+</html>
