@@ -46,13 +46,22 @@ function currently(response) {
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
+
+  document.querySelector("#precip").innerHTML =
+    "response.data.weather.main.description";
+  document.querySelector(
+    "#humid"
+  ).innerHTML = `${response.data.main.humidity}%`;
+  document.querySelector(
+    "wind"
+  ).innerHTML = `${response.data.main.wind.speed} mph`;
 }
 
 let currentCity = "Atlanta";
 let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(currently);
-
+console.log(apiUrl);
 function showTemp(response) {
   let cTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
@@ -69,7 +78,7 @@ function citySearch(event) {
   let p = document.querySelector("#forecast");
   let apiKey = "037d9b04c685370b3f28aaa4b1482345";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=${apiKey}&units=imperial`;
-  h1.innerHTML = `Currently in ${cityName.value}`;
+  h1.innerHTML = `Currently ${cityName.value}`;
   p.innerHTML = `Next Five Days in ${cityName.value}`;
 
   axios.get(apiUrl).then(showTemp);
@@ -104,7 +113,7 @@ function btnTemp(position) {
   let btn = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
 
-  city.innerHTML = `Currently in ${position.data.name}`;
+  city.innerHTML = `Currently ${position.data.name}`;
   forecast.innerHTML = `Next Five Days in ${position.data.name}`;
   btn.innerHTML = `${Math.round(position.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(

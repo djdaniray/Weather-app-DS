@@ -26,6 +26,10 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
+            <div class="col-12">
+              <h1>Currently Atlanta</h1>
+            </div>
+
             <div class="col-6">
               <form id="search-form">
                 <label> Search Location </label>
@@ -53,9 +57,6 @@
             </div>
 
             <div class="col-6">
-              <h1>Currently in Atlanta</h1>
-            </div>
-            <div class="col-12">
               <h3 class="display">
                 <i class="fas fa-cloud-sun"></i>
                 <span id="temp"> 77 </span>
@@ -70,18 +71,27 @@
               </h3>
             </div>
 
-            <br />
-
-            <div class="col-12">
+            <div class="col-6">
               <ul class="date-time">
                 <li id="current-date">Thursday, 10/22/2020</li>
                 <li id="current-time">8:00 PM</li>
                 <li>
                   <small> Updated 5 minutes ago </small>
                 </li>
-                <hr />
               </ul>
-              <p class="futureWeather" id="forecast">
+            </div>
+            <div class="col-6">
+              <ul class="weather-details">
+                <li><span id="descrip">Cloudy</span></li>
+                <li>Humidity:<span id="humid"> 59%</span></li>
+                <li>Wind Speed:<span id="wind"> 16 mph</span></li>
+              </ul>
+            </div>
+
+            <br />
+            <hr />
+            <div class="col-12">
+              <p class="future-weather" id="forecast">
                 <strong> Next Five Days in Atlanta </strong>
               </p>
             </div>

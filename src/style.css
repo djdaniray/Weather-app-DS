@@ -11,7 +11,7 @@ h1 {
   font-size: 50px;
 }
 form {
-  margin: 0 auto;
+  margin-left: 5px;
   text-align: center;
 }
 label {
@@ -19,7 +19,7 @@ label {
   margin-bottom: 1px;
 }
 ul,
-.col-12 {
+.date-time {
   text-align: left;
   font-size: 25px;
   color: white;
@@ -37,7 +37,7 @@ div.row {
   font-size: 19px;
 }
 .container {
-  max-width: 800px;
+  max-width: 750px;
 }
 div.card {
   background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
@@ -51,7 +51,7 @@ div.row h3 {
   font-weight: 900;
   padding: 10px;
   line-height: 15px;
-  margin: 0 50px 0;
+  margin: 0 2px 0;
 }
 
 div.fri,
@@ -71,10 +71,17 @@ div.fri,
 .btn:hover {
   background: #fbc2eb;
 }
-.futureWeather {
+.future-weather {
+  color: #ffff;
+  text-align: left;
   font-size: 30px;
   font-weight: bolder;
+  margin: 0 0 5px;
 }
 .hi-lo {
   text-align: center;
+}
+.weather-details {
+  text-align: Left;
+  margin: 0 2px 0 65px;
 }
