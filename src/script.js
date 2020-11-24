@@ -47,7 +47,7 @@ function currently(response) {
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
 
-  document.querySelector("#precip").innerHTML =
+  document.querySelector("#descrip").innerHTML =
     "response.data.weather.main.description";
   document.querySelector(
     "#humid"
@@ -61,7 +61,7 @@ let currentCity = "Atlanta";
 let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(currently);
-console.log(apiUrl);
+
 function showTemp(response) {
   let cTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
