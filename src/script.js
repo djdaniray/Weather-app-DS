@@ -46,15 +46,12 @@ function currently(response) {
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
-
-  document.querySelector("#descrip").innerHTML =
-    "response.data.weather.main.description";
-  document.querySelector(
-    "#humid"
-  ).innerHTML = `${response.data.main.humidity}%`;
-  document.querySelector(
-    "wind"
-  ).innerHTML = `${response.data.main.wind.speed} mph`;
+  console.log(response.data);
+  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
+  document.querySelector("#humid").innerHTML = response.data.main.humidity;
+  document.querySelector("wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
 }
 
 let currentCity = "Atlanta";
@@ -69,6 +66,11 @@ function showTemp(response) {
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
+  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
+  document.querySelector("#humid").innerHTML = response.data.main.humidity;
+  document.querySelector("wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
 }
 
 function citySearch(event) {
@@ -80,6 +82,11 @@ function citySearch(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=${apiKey}&units=imperial`;
   h1.innerHTML = `Currently ${cityName.value}`;
   p.innerHTML = `Next Five Days in ${cityName.value}`;
+  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
+  document.querySelector("#humid").innerHTML = response.data.main.humidity;
+  document.querySelector("wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
 
   axios.get(apiUrl).then(showTemp);
 }
@@ -119,6 +126,11 @@ function btnTemp(position) {
   minTemp.innerHTML = `Hi ${Math.round(
     position.data.main.temp_max
   )}°F | Lo ${Math.round(position.data.main.temp_min)}°F`;
+  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
+  document.querySelector("#humid").innerHTML = response.data.main.humidity;
+  document.querySelector("wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
 }
 
 function handlePosition(position) {
