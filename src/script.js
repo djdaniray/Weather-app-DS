@@ -152,5 +152,5 @@ function showForecast(response) {
   console.log(response.data);
 }
 
-let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${currentCity}&cnt=5&appid=${apiKey}&units=imperial`;
+let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial&cnt=1`;
 axios.get(apiForecastUrl).then(showForecast);
