@@ -144,3 +144,13 @@ function currentLocationBtn(event) {
 
 let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
+
+//forecast
+function showForecast(response) {
+  document.querySelector("#day1").innerHTML = "test";
+
+  console.log(response.data);
+}
+
+let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${currentCity}&cnt=5&appid=${apiKey}&units=imperial`;
+axios.get(apiForecastUrl).then(showForecast);
