@@ -84,12 +84,6 @@ function citySearch(event) {
   let p = document.querySelector("#forecast");
   p.innerHTML = `Next Five Days in ${cityName.value}`;
 
-  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
-  document.querySelector("#humid").innerHTML = response.data.main.humidity;
-  document.querySelector("wind").innerHTML = Math.round(
-    response.data.wind.speed
-  );
-
   axios.get(apiUrl).then(showTemp);
 }
 let cityInput = document.querySelector("#search-form");
