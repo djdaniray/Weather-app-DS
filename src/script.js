@@ -49,7 +49,7 @@ function currently(response) {
   console.log(response.data);
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
-  document.querySelector("wind").innerHTML = Math.round(
+  document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
 }
@@ -69,7 +69,7 @@ function showTemp(response) {
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
-  document.querySelector("wind").innerHTML = Math.round(
+  document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
 }
@@ -124,7 +124,7 @@ function btnTemp(position) {
 
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
-  document.querySelector("wind").innerHTML = Math.round(
+  document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
 }
