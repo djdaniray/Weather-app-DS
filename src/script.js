@@ -41,8 +41,8 @@ liTime.innerHTML = `${hour}:${minutes}`;
 
 function currently(response) {
   let cTemp = document.querySelector("#temp");
-  let minTemp = document.querySelector("#im-hi-lo");
   cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  let minTemp = document.querySelector("#im-hi-lo");
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -61,8 +61,9 @@ axios.get(apiUrl).then(currently);
 
 function showTemp(response) {
   let cTemp = document.querySelector("#temp");
-  let minTemp = document.querySelector("#im-hi-lo");
   cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  let minTemp = document.querySelector("#im-hi-lo");
+
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -97,16 +98,16 @@ cityInput.addEventListener("submit", citySearch);
 function getCelscius(event) {
   event.preventDefault();
   let h3 = document.querySelector("#temp");
-  let dayTemp = document.querySelector("#im-hi-lo");
   h3.innerHTML = `25`;
+  let dayTemp = document.querySelector("#im-hi-lo");
   dayTemp.innerHTML = `Hi 27°C | Lo 18°C`;
 }
 
 function getFahrenheit(event) {
   event.preventDefault();
   let h3 = document.querySelector("#temp");
-  let dayTemp = document.querySelector("#im-hi-lo");
   h3.innerHTML = `77`;
+  let dayTemp = document.querySelector("#im-hi-lo");
   dayTemp.innerHTML = `Hi 80°F | Lo 65°F`;
 }
 
@@ -117,16 +118,16 @@ fahrenheit.addEventListener("click", getFahrenheit);
 
 function btnTemp(position) {
   let city = document.querySelector("h1");
-  let forecast = document.querySelector("#forecast");
-  let btn = document.querySelector("#temp");
-  let minTemp = document.querySelector("#im-hi-lo");
-
   city.innerHTML = `Currently ${position.data.name}`;
+  let forecast = document.querySelector("#forecast");
   forecast.innerHTML = `Next Five Days in ${position.data.name}`;
+  let btn = document.querySelector("#temp");
   btn.innerHTML = `${Math.round(position.data.main.temp)}`;
+  let minTemp = document.querySelector("#im-hi-lo");
   minTemp.innerHTML = `Hi ${Math.round(
     position.data.main.temp_max
   )}°F | Lo ${Math.round(position.data.main.temp_min)}°F`;
+
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
   document.querySelector("wind").innerHTML = Math.round(
