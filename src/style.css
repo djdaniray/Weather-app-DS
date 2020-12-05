@@ -37,7 +37,7 @@ div.row {
   font-size: 19px;
 }
 .container {
-  max-width: 750px;
+  max-width: 700px;
 }
 div.card {
   background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);

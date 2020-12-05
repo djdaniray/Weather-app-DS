@@ -46,7 +46,7 @@ function currently(response) {
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
-  console.log(response.data);
+
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
@@ -147,10 +147,10 @@ button.addEventListener("click", currentLocationBtn);
 
 //forecast
 function showForecast(response) {
-  document.querySelector("#day1").innerHTML = "test";
+  document.querySelector("#day1").innerHTML = "";
 
   console.log(response.data);
 }
 
-let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial&cnt=1`;
+let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial&cnt=5`;
 axios.get(apiForecastUrl).then(showForecast);
