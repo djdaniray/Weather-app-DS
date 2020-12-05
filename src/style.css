@@ -7,7 +7,6 @@ body {
 h1 {
   color: #42a5f5;
   text-align: center;
-  font-weight: 900;
   font-size: 50px;
 }
 form {
@@ -48,7 +47,6 @@ div.row h3 {
   color: #ab47bc;
   text-align: right;
   font-size: 70px;
-  font-weight: 900;
   padding: 10px;
   line-height: 15px;
   margin: 0 2px 0;
@@ -75,7 +73,6 @@ div.fri,
   color: #ffff;
   text-align: left;
   font-size: 30px;
-  font-weight: bolder;
   margin: 0 0 5px;
 }
 .hi-lo {
