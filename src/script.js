@@ -1,3 +1,4 @@
+//setting date
 let now = new Date();
 let days = [
   "Sunday",
@@ -41,13 +42,14 @@ liDate.innerHTML = ` ${month} ${date}, ${year}`;
 liTime.innerHTML = `${hour}:${minutes}`;
 liDay.innerHTML = `${day}`;
 
+//Current weather for Atlanta
 function currently(response) {
   let cTemp = document.querySelector("#temp");
   cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   let minTemp = document.querySelector("#im-hi-lo");
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
-  )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
+  )} | Lo ${Math.round(response.data.main.temp_min)}`;
 
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
@@ -68,14 +70,14 @@ function showTemp(response) {
 
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
-  )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
+  )} | Lo ${Math.round(response.data.main.temp_min)}`;
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
 }
-
+//Search Bar city
 function citySearch(event) {
   event.preventDefault();
   let cityName = document.querySelector("#city-input-value");
@@ -90,14 +92,21 @@ function citySearch(event) {
 }
 let cityInput = document.querySelector("#search-form");
 cityInput.addEventListener("submit", citySearch);
+// Clicking F and C temperatures
 
-function getCelscius(event) {
-  event.preventDefault();
-  let h3 = document.querySelector("#temp");
+function showCelscius(response) {
+  console.log(response);
+  document.querySelector("#temp").innerHTML = "test";
   h3.innerHTML = `25`;
   let dayTemp = document.querySelector("#im-hi-lo");
   dayTemp.innerHTML = `Hi 27°C | Lo 18°C`;
 }
+function getCelscius(event) {
+  event.preventDefault();
+  showCelscius();
+}
+let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
+axios.get(apiUrlMetric).then(getCelscius);
 
 function getFahrenheit(event) {
   event.preventDefault();
@@ -111,7 +120,7 @@ let celscius = document.querySelector("#metric");
 let fahrenheit = document.querySelector("#imperial");
 celscius.addEventListener("click", getCelscius);
 fahrenheit.addEventListener("click", getFahrenheit);
-
+//Current location button
 function btnTemp(position) {
   let city = document.querySelector("h1");
   city.innerHTML = `Currently ${position.data.name}`;
