@@ -34,10 +34,12 @@ let minutes = now.getMinutes();
 if (minutes < 10) {
   minutes = `0${minutes}`;
 }
+let liDay = document.querySelector("li.current-day");
 let liDate = document.querySelector("#current-date");
 let liTime = document.querySelector("#current-time");
-liDate.innerHTML = `${day}, ${month} ${date}, ${year}`;
+liDate.innerHTML = ` ${month} ${date}, ${year}`;
 liTime.innerHTML = `${hour}:${minutes}`;
+liDay.innerHTML = `${day}`;
 
 function currently(response) {
   let cTemp = document.querySelector("#temp");
