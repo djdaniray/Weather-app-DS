@@ -187,9 +187,7 @@ let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
 
 //forecast
-function showForecast(response) {
-  console.log(response.data);
-}
+function showForecast(response) {}
 
 let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial&cnt=5`;
 axios.get(apiForecastUrl).then(showForecast);
