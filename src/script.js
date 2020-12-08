@@ -115,7 +115,11 @@ function showCelscius(response) {
   dayTemp.innerHTML = `Hi 27°C | Lo 18°C`;
 }
 function getCelscius(event) {
-  console.log(event);
+  event.preventDefault();
+  let h3 = document.querySelector("#temp");
+  let dayTemp = document.querySelector("#im-hi-lo");
+  h3.innerHTML = `30`;
+  dayTemp.innerHTML = `Hi 34°C | Lo 25°C`;
 }
 let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
 axios.get(apiUrlMetric).then(getCelscius);
