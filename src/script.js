@@ -49,7 +49,7 @@ function currently(response) {
   let minTemp = document.querySelector("#im-hi-lo");
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
-  )} | Lo ${Math.round(response.data.main.temp_min)}`;
+  )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
 
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
@@ -120,6 +120,7 @@ let celscius = document.querySelector("#metric");
 let fahrenheit = document.querySelector("#imperial");
 celscius.addEventListener("click", getCelscius);
 fahrenheit.addEventListener("click", getFahrenheit);
+
 //Current location button
 function btnTemp(position) {
   let city = document.querySelector("h1");
@@ -158,8 +159,6 @@ button.addEventListener("click", currentLocationBtn);
 
 //forecast
 function showForecast(response) {
-  document.querySelector("#day1").innerHTML = "";
-
   console.log(response.data);
 }
 
