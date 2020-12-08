@@ -55,9 +55,9 @@ function currently(response) {
 
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind").innerHTML = Math.round(
+  document.querySelector("#wind").innerHTML = `${Math.round(
     response.data.wind.speed
-  );
+  )} mph`;
   icon.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -81,9 +81,9 @@ function showTemp(response) {
   )} | Lo ${Math.round(response.data.main.temp_min)}`;
   document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind").innerHTML = Math.round(
+  document.querySelector("#wind").innerHTML = `${Math.round(
     response.data.wind.speed
-  );
+  )} mph`;
   icon.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -105,31 +105,38 @@ function citySearch(event) {
 }
 let cityInput = document.querySelector("#search-form");
 cityInput.addEventListener("submit", citySearch);
+
 // Clicking F and C temperatures
 
 function showCelscius(response) {
-  console.log(response);
-  document.querySelector("#temp").innerHTML = "test";
-  h3.innerHTML = `25`;
+  let h3 = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
-  dayTemp.innerHTML = `Hi 27°C | Lo 18°C`;
+  let windElement = document.querySelector("#wind");
+  h3.innerHTML = Math.round(response.data.main.temp);
+  dayTemp.innerHTML = `Hi ${Math.round(
+    response.data.main.temp_max
+  )} °C | Lo ${Math.round(response.data.main.temp_min)} °C`;
+  windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
 }
+
 function getCelscius(event) {
   event.preventDefault();
+  let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrlMetric).then(showCelscius);
+}
+function showFahrenheit(response) {
   let h3 = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
-  h3.innerHTML = `30`;
-  dayTemp.innerHTML = `Hi 34°C | Lo 25°C`;
+  let windElement = document.querySelector("#wind");
+  h3.innerHTML = Math.round(response.data.main.temp);
+  dayTemp.innerHTML = `Hi ${Math.round(
+    response.data.main.temp_max
+  )}°F| Lo ${Math.round(response.data.main.temp_min)} °F`;
+  windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`;
 }
-let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
-axios.get(apiUrlMetric).then(getCelscius);
-
 function getFahrenheit(event) {
   event.preventDefault();
-  let h3 = document.querySelector("#temp");
-  let dayTemp = document.querySelector("#im-hi-lo");
-  h3.innerHTML = `77`;
-  dayTemp.innerHTML = `Hi 80°F | Lo 65°F`;
+  axios.get(apiUrl).then(showFahrenheit);
 }
 
 let celscius = document.querySelector("#metric");
@@ -155,7 +162,7 @@ function btnTemp(position) {
   )}°F | Lo ${Math.round(position.data.main.temp_min)}°F`;
   descriptionElement.innerHTML = position.data.weather[0].main;
   humidityElement.innerHTML = position.data.main.humidity;
-  windElement.innerHTML = Math.round(position.data.wind.speed);
+  windElement.innerHTML = `${Math.round(position.data.wind.speed)} mph`;
   icon.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${position.data.weather[0].icon}@2x.png`
