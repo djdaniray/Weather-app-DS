@@ -46,6 +46,7 @@ liDay.innerHTML = `${day}`;
 function currently(response) {
   let cTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
+  let icon = document.querySelector("#icon");
   cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
 
   minTemp.innerHTML = `Hi ${Math.round(
@@ -57,6 +58,11 @@ function currently(response) {
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
+  icon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
 let currentCity = "Atlanta";
@@ -64,9 +70,11 @@ let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(currently);
 
+//Search Bar city
 function showTemp(response) {
   let cTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
+  let icon = document.querySelector("#icon");
   cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
@@ -76,8 +84,13 @@ function showTemp(response) {
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
+  icon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
-//Search Bar city
+
 function citySearch(event) {
   event.preventDefault();
   let cityName = document.querySelector("#city-input-value");
@@ -129,6 +142,7 @@ function btnTemp(position) {
   let descriptionElement = document.querySelector("#descrip");
   let humidityElement = document.querySelector("#humid");
   let windElement = document.querySelector("#wind");
+  let icon = document.querySelector("#icon");
   city.innerHTML = `Currently ${position.data.name}`;
   forecast.innerHTML = `Next Five Days in ${position.data.name}`;
   btn.innerHTML = `${Math.round(position.data.main.temp)}`;
@@ -138,6 +152,11 @@ function btnTemp(position) {
   descriptionElement.innerHTML = position.data.weather[0].main;
   humidityElement.innerHTML = position.data.main.humidity;
   windElement.innerHTML = Math.round(position.data.wind.speed);
+  icon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${position.data.weather[0].icon}@2x.png`
+  );
+  icon.setAttribute("alt", `${position.data.weather[0].description}`);
 }
 
 function handlePosition(position) {

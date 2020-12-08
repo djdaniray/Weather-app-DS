@@ -17,6 +17,10 @@ label {
   font-size: 20px;
   margin-bottom: 1px;
 }
+img {
+  margin-right: -24px;
+}
+
 ul,
 .date-time {
   text-align: left;
@@ -49,7 +53,7 @@ div.row h3 {
   font-size: 70px;
   padding: 10px;
   line-height: 15px;
-  margin: 0 2px 0;
+  margin-right: 35px;
 }
 
 div.fri,
