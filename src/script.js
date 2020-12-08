@@ -45,8 +45,9 @@ liDay.innerHTML = `${day}`;
 //Current weather for Atlanta
 function currently(response) {
   let cTemp = document.querySelector("#temp");
-  cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   let minTemp = document.querySelector("#im-hi-lo");
+  cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -65,9 +66,8 @@ axios.get(apiUrl).then(currently);
 
 function showTemp(response) {
   let cTemp = document.querySelector("#temp");
-  cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   let minTemp = document.querySelector("#im-hi-lo");
-
+  cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )} | Lo ${Math.round(response.data.main.temp_min)}`;
@@ -84,8 +84,8 @@ function citySearch(event) {
   let apiKey = "037d9b04c685370b3f28aaa4b1482345";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=${apiKey}&units=imperial`;
   let h1 = document.querySelector("h1");
-  h1.innerHTML = `Currently ${cityName.value}`;
   let p = document.querySelector("#forecast");
+  h1.innerHTML = `Currently ${cityName.value}`;
   p.innerHTML = `Next Five Days in ${cityName.value}`;
 
   axios.get(apiUrl).then(showTemp);
@@ -102,8 +102,7 @@ function showCelscius(response) {
   dayTemp.innerHTML = `Hi 27°C | Lo 18°C`;
 }
 function getCelscius(event) {
-  event.preventDefault();
-  showCelscius();
+  console.log(event);
 }
 let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
 axios.get(apiUrlMetric).then(getCelscius);
@@ -111,8 +110,8 @@ axios.get(apiUrlMetric).then(getCelscius);
 function getFahrenheit(event) {
   event.preventDefault();
   let h3 = document.querySelector("#temp");
-  h3.innerHTML = `77`;
   let dayTemp = document.querySelector("#im-hi-lo");
+  h3.innerHTML = `77`;
   dayTemp.innerHTML = `Hi 80°F | Lo 65°F`;
 }
 
@@ -124,21 +123,21 @@ fahrenheit.addEventListener("click", getFahrenheit);
 //Current location button
 function btnTemp(position) {
   let city = document.querySelector("h1");
-  city.innerHTML = `Currently ${position.data.name}`;
   let forecast = document.querySelector("#forecast");
-  forecast.innerHTML = `Next Five Days in ${position.data.name}`;
   let btn = document.querySelector("#temp");
-  btn.innerHTML = `${Math.round(position.data.main.temp)}`;
   let minTemp = document.querySelector("#im-hi-lo");
+  let descriptionElement = document.querySelector("#descrip");
+  let humidityElement = document.querySelector("#humid");
+  let windElement = document.querySelector("#wind");
+  city.innerHTML = `Currently ${position.data.name}`;
+  forecast.innerHTML = `Next Five Days in ${position.data.name}`;
+  btn.innerHTML = `${Math.round(position.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     position.data.main.temp_max
   )}°F | Lo ${Math.round(position.data.main.temp_min)}°F`;
-
-  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
-  document.querySelector("#humid").innerHTML = response.data.main.humidity;
-  document.querySelector("#wind").innerHTML = Math.round(
-    response.data.wind.speed
-  );
+  descriptionElement.innerHTML = position.data.weather[0].main;
+  humidityElement.innerHTML = position.data.main.humidity;
+  windElement.innerHTML = Math.round(position.data.wind.speed);
 }
 
 function handlePosition(position) {
