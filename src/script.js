@@ -60,7 +60,6 @@ day5.innerHTML = abbreviatedDays[now.getDay() - 2];
 
 //Current weather for Atlanta
 function currently(response) {
-  console.log(response.data);
   let cTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
