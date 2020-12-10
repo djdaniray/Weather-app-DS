@@ -23,6 +23,7 @@ let months = [
   "November",
   "December",
 ];
+
 let day = days[now.getDay()];
 let month = months[now.getMonth()];
 let date = now.getDate();
@@ -35,12 +36,27 @@ let minutes = now.getMinutes();
 if (minutes < 10) {
   minutes = `0${minutes}`;
 }
+let abbreviatedDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 let liDay = document.querySelector("li.current-day");
 let liDate = document.querySelector("#current-date");
 let liTime = document.querySelector("#current-time");
+let day1 = document.querySelector("#day1");
+let day2 = document.querySelector("#day2");
+let day3 = document.querySelector("#day3");
+let day4 = document.querySelector("#day4");
+let day5 = document.querySelector("#day5");
 liDate.innerHTML = ` ${month} ${date}, ${year}`;
 liTime.innerHTML = `Updated at ${hour}:${minutes}`;
 liDay.innerHTML = `${day}`;
+
+let upcoming = abbreviatedDays[now.getDay() + 1];
+
+day1.innerHTML = abbreviatedDays[now.getDay() + 1];
+day2.innerHTML = abbreviatedDays[now.getDay() + 2];
+day3.innerHTML = abbreviatedDays[now.getDay() + 3];
+day4.innerHTML = abbreviatedDays[now.getDay() - 3];
+day5.innerHTML = abbreviatedDays[now.getDay() - 2];
 
 //Current weather for Atlanta
 function currently(response) {
@@ -118,7 +134,7 @@ function showCelscius(response) {
   h3.innerHTML = Math.round(response.data.main.temp);
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
-  )} °C | Lo ${Math.round(response.data.main.temp_min)} °C`;
+  )}°C | Lo ${Math.round(response.data.main.temp_min)}°C`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
 }
 
@@ -134,7 +150,7 @@ function showFahrenheit(response) {
   h3.innerHTML = Math.round(response.data.main.temp);
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
-  )}°F| Lo ${Math.round(response.data.main.temp_min)} °F`;
+  )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
   windElement.innerHTML = `${Math.round(response.data.wind.speed)} mph`;
 }
 function getFahrenheit(event) {
