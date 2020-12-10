@@ -39,11 +39,12 @@ let liDay = document.querySelector("li.current-day");
 let liDate = document.querySelector("#current-date");
 let liTime = document.querySelector("#current-time");
 liDate.innerHTML = ` ${month} ${date}, ${year}`;
-liTime.innerHTML = `${hour}:${minutes}`;
+liTime.innerHTML = `Updated at ${hour}:${minutes}`;
 liDay.innerHTML = `${day}`;
 
 //Current weather for Atlanta
 function currently(response) {
+  console.log(response.data);
   let cTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
@@ -53,7 +54,8 @@ function currently(response) {
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
 
-  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
+  document.querySelector("#descrip").innerHTML =
+    response.data.weather[0].description;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = `${Math.round(
     response.data.wind.speed
@@ -79,7 +81,8 @@ function showTemp(response) {
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )} | Lo ${Math.round(response.data.main.temp_min)}`;
-  document.querySelector("#descrip").innerHTML = response.data.weather[0].main;
+  document.querySelector("#descrip").innerHTML =
+    response.data.weather[0].description;
   document.querySelector("#humid").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = `${Math.round(
     response.data.wind.speed
@@ -160,7 +163,7 @@ function btnTemp(position) {
   minTemp.innerHTML = `Hi ${Math.round(
     position.data.main.temp_max
   )}°F | Lo ${Math.round(position.data.main.temp_min)}°F`;
-  descriptionElement.innerHTML = position.data.weather[0].main;
+  descriptionElement.innerHTML = position.data.weather[0].description;
   humidityElement.innerHTML = position.data.main.humidity;
   windElement.innerHTML = `${Math.round(position.data.wind.speed)} mph`;
   icon.setAttribute(

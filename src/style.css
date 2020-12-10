@@ -55,6 +55,9 @@ div.row h3 {
   line-height: 15px;
   margin-right: 35px;
 }
+#descrip {
+  text-transform: capitalize;
+}
 
 div.fri,
 .sat,
