@@ -22,6 +22,8 @@ img {
 }
 a {
   color: #42a5f5;
+  cursor: default;
+  text-decoration: none;
 }
 ul,
 .date-time {
@@ -39,7 +41,7 @@ div.row {
   color: #ab47bc;
 }
 .hi-lo {
-  font-size: 13px;
+  font-size: 20px;
 }
 .container {
   max-width: 700px;
@@ -88,4 +90,12 @@ div.fri,
 .weather-details {
   text-align: Left;
   margin: -3px 2px 0 65px;
+}
+.active {
+  color: #ab47bc;
+  cursor: default;
+}
+.active:hover {
+  text-decoration: none;
+  color: #ab47bc;
 }

@@ -141,6 +141,8 @@ function getCelscius(event) {
   event.preventDefault();
   let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrlMetric).then(showCelscius);
+  celsciusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
 }
 function showFahrenheit(response) {
   let h3 = document.querySelector("#temp");
@@ -155,12 +157,14 @@ function showFahrenheit(response) {
 function getFahrenheit(event) {
   event.preventDefault();
   axios.get(apiUrl).then(showFahrenheit);
+  celsciusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
 }
 
-let celscius = document.querySelector("#metric");
-let fahrenheit = document.querySelector("#imperial");
-celscius.addEventListener("click", getCelscius);
-fahrenheit.addEventListener("click", getFahrenheit);
+let celsciusLink = document.querySelector("#metric");
+let fahrenheitLink = document.querySelector("#imperial");
+celsciusLink.addEventListener("click", getCelscius);
+fahrenheitLink.addEventListener("click", getFahrenheit);
 
 //Current location button
 function btnTemp(position) {
