@@ -59,12 +59,11 @@ day4.innerHTML = abbreviatedDays[now.getDay() - 3];
 day5.innerHTML = abbreviatedDays[now.getDay() - 2];
 
 //Current weather for Atlanta
-function currently(response) {
-  let cTemp = document.querySelector("#temp");
+function temperature(response) {
+  let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
-  cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
-
+  currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -85,14 +84,16 @@ function currently(response) {
 let currentCity = "Atlanta";
 let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
-axios.get(apiUrl).then(currently);
+axios.get(apiUrl).then(temperature);
+
+let fahrenheitTemp = null;
 
 //Search Bar city
 function showTemp(response) {
-  let cTemp = document.querySelector("#temp");
+  let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
-  cTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )} | Lo ${Math.round(response.data.main.temp_min)}`;
@@ -118,6 +119,9 @@ function citySearch(event) {
   let p = document.querySelector("#forecast");
   h1.innerHTML = `Currently ${cityName.value}`;
   p.innerHTML = `Next Five Days in ${cityName.value}`;
+  celsciusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  celsciusTemp.innerHTML = Math.round((fahrenheitTemp - 32) * (5 / 9));
 
   axios.get(apiUrl).then(showTemp);
 }
@@ -127,10 +131,9 @@ cityInput.addEventListener("submit", citySearch);
 // Clicking F and C temperatures
 
 function showCelscius(response) {
-  let h3 = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
-  h3.innerHTML = Math.round(response.data.main.temp);
+
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°C | Lo ${Math.round(response.data.main.temp_min)}°C`;
@@ -139,10 +142,13 @@ function showCelscius(response) {
 
 function getCelscius(event) {
   event.preventDefault();
+
+  let celsciusTemp = document.querySelector("#temp");
   let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrlMetric).then(showCelscius);
   celsciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
+  celsciusTemp.innerHTML = Math.round((fahrenheitTemp - 32) * (5 / 9));
 }
 function showFahrenheit(response) {
   let h3 = document.querySelector("#temp");
