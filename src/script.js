@@ -47,7 +47,7 @@ let day3 = document.querySelector("#day3");
 let day4 = document.querySelector("#day4");
 let day5 = document.querySelector("#day5");
 liDate.innerHTML = ` ${month} ${date}, ${year}`;
-liTime.innerHTML = `Updated at ${hour}:${minutes}`;
+liTime.innerHTML = `Last updated ${hour}:${minutes}`;
 liDay.innerHTML = `${day}`;
 
 let upcoming = abbreviatedDays[now.getDay() + 1];
@@ -86,7 +86,7 @@ let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(temperature);
 
-let fahrenheitTemp = null;
+let fahrenheitTemp = console.log(fahrenheitTemp);
 
 //Search Bar city
 function showTemp(response) {
@@ -117,6 +117,7 @@ function citySearch(event) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=${apiKey}&units=imperial`;
   let h1 = document.querySelector("h1");
   let p = document.querySelector("#forecast");
+  let celsciusTemp = document.querySelector("#temp");
   h1.innerHTML = `Currently ${cityName.value}`;
   p.innerHTML = `Next Five Days in ${cityName.value}`;
   celsciusLink.classList.add("active");
