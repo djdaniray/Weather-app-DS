@@ -86,7 +86,7 @@ let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(temperature);
 
-let fahrenheitTemp = console.log(fahrenheitTemp);
+let fahrenheitTemp = null;
 
 //Search Bar city
 function showTemp(response) {
