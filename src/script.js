@@ -99,13 +99,9 @@ function citySearch(event) {
   let apiKey = "037d9b04c685370b3f28aaa4b1482345";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=${apiKey}&units=imperial`;
   let h1 = document.querySelector("h1");
-  let p = document.querySelector("#forecast");
-  let celsciusTemp = document.querySelector("#temp");
   h1.innerHTML = `Currently ${cityName.value}`;
-  p.innerHTML = `Next Five Days in ${cityName.value}`;
   celsciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
-  celsciusTemp.innerHTML = Math.round((fahrenheitTemp - 32) * (5 / 9));
 
   axios.get(apiUrl).then(showTemp);
 }
@@ -133,6 +129,7 @@ function getCelscius(event) {
   fahrenheitLink.classList.remove("active");
 }
 function showFahrenheit(response) {
+  console.log(response.data);
   let h3 = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
@@ -148,6 +145,11 @@ function getFahrenheit(event) {
   celsciusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
+
+let celsciusLink = document.querySelector("#metric");
+let fahrenheitLink = document.querySelector("#imperial");
+celsciusLink.addEventListener("click", getCelscius);
+fahrenheitLink.addEventListener("click", getFahrenheit);
 
 //Current location button
 function btnTemp(position) {
@@ -210,23 +212,15 @@ function showForecast(response) {
       `;
   }
 }
-//Global variables
 let currentCity = "Atlanta";
 let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(temperature);
-
-apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial`;
-
-axios.get(apiUrl).then(showForecast);
+let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial`;
+axios.get(apiUrlForecast).then(showForecast);
 
 let cityInput = document.querySelector("#search-form");
 cityInput.addEventListener("submit", citySearch);
 
 let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
-
-let celsciusLink = document.querySelector("#metric");
-let fahrenheitLink = document.querySelector("#imperial");
-celsciusLink.addEventListener("click", getCelscius);
-fahrenheitLink.addEventListener("click", getFahrenheit);
