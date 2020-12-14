@@ -36,27 +36,12 @@ let minutes = now.getMinutes();
 if (minutes < 10) {
   minutes = `0${minutes}`;
 }
-let abbreviatedDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
 let liDay = document.querySelector("li.current-day");
 let liDate = document.querySelector("#current-date");
 let liTime = document.querySelector("#current-time");
-let day1 = document.querySelector("#day1");
-let day2 = document.querySelector("#day2");
-let day3 = document.querySelector("#day3");
-let day4 = document.querySelector("#day4");
-let day5 = document.querySelector("#day5");
 liDate.innerHTML = ` ${month} ${date}, ${year}`;
 liTime.innerHTML = `Last updated ${hour}:${minutes}`;
 liDay.innerHTML = `${day}`;
-
-let upcoming = abbreviatedDays[now.getDay() + 1];
-
-day1.innerHTML = abbreviatedDays[now.getDay() + 1];
-day2.innerHTML = abbreviatedDays[now.getDay() + 2];
-day3.innerHTML = abbreviatedDays[now.getDay() + 3];
-day4.innerHTML = abbreviatedDays[now.getDay() - 3];
-day5.innerHTML = abbreviatedDays[now.getDay() - 2];
 
 //Current weather for Atlanta
 function temperature(response) {
