@@ -80,7 +80,7 @@ function temperature(response) {
   );
   icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
-let fahrenheitTemp = temperature.currentTemp;
+
 let currentCity = "Atlanta";
 let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
