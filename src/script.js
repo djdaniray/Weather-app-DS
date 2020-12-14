@@ -1,4 +1,5 @@
 //setting date
+
 let now = new Date();
 let days = [
   "Sunday",
@@ -43,6 +44,10 @@ liDate.innerHTML = ` ${month} ${date}, ${year}`;
 liTime.innerHTML = `Last updated ${hour}:${minutes}`;
 liDay.innerHTML = `${day}`;
 
+function formatHours(timestamp) {
+  return `${hour}:00`;
+}
+
 //Current weather for Atlanta
 function temperature(response) {
   let currentTemp = document.querySelector("#temp");
@@ -65,11 +70,6 @@ function temperature(response) {
   );
   icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
-
-let currentCity = "Atlanta";
-let apiKey = "037d9b04c685370b3f28aaa4b1482345";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
-axios.get(apiUrl).then(temperature);
 
 //Search Bar city
 function showTemp(response) {
@@ -109,8 +109,6 @@ function citySearch(event) {
 
   axios.get(apiUrl).then(showTemp);
 }
-let cityInput = document.querySelector("#search-form");
-cityInput.addEventListener("submit", citySearch);
 
 // Clicking F and C temperatures
 
@@ -151,15 +149,9 @@ function getFahrenheit(event) {
   fahrenheitLink.classList.add("active");
 }
 
-let celsciusLink = document.querySelector("#metric");
-let fahrenheitLink = document.querySelector("#imperial");
-celsciusLink.addEventListener("click", getCelscius);
-fahrenheitLink.addEventListener("click", getFahrenheit);
-
 //Current location button
 function btnTemp(position) {
   let city = document.querySelector("h1");
-  let forecast = document.querySelector("#forecast");
   let btn = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let descriptionElement = document.querySelector("#descrip");
@@ -167,7 +159,6 @@ function btnTemp(position) {
   let windElement = document.querySelector("#wind");
   let icon = document.querySelector("#icon");
   city.innerHTML = `Currently ${position.data.name}`;
-  forecast.innerHTML = `Next Five Days in ${position.data.name}`;
   btn.innerHTML = `${Math.round(position.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     position.data.main.temp_max
@@ -188,6 +179,7 @@ function handlePosition(position) {
   let apiKey = "037d9b04c685370b3f28aaa4b1482345";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(btnTemp);
+  axios.get(apiUrl).then(showForecast);
 }
 
 function currentLocationBtn(event) {
@@ -195,11 +187,46 @@ function currentLocationBtn(event) {
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
+//forecast
+function showForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+
+    forecastElement.innerHTML = forecastElement.innerHTML += `<div class="col-2">
+      <h5> ${formatHours(forecast.dt * 1000)} </h5>
+      <img src="http://openweathermap.org/img/wn/${
+        forecast.weather[0].icon
+      }@2x.png" />
+      <div class= "high-temp">
+      <strong>${Math.round(forecast.main.temp_max)}° </strong > ${Math.round(
+      forecast.main.temp_min
+    )}°
+      </div>
+      </div>
+      `;
+  }
+}
+//Global variables
+let currentCity = "Atlanta";
+let apiKey = "037d9b04c685370b3f28aaa4b1482345";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
+axios.get(apiUrl).then(temperature);
+
+apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial`;
+
+axios.get(apiUrl).then(showForecast);
+
+let cityInput = document.querySelector("#search-form");
+cityInput.addEventListener("submit", citySearch);
+
 let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
 
-//forecast
-function showForecast(response) {}
-
-let apiForecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial&cnt=5`;
-axios.get(apiForecastUrl).then(showForecast);
+let celsciusLink = document.querySelector("#metric");
+let fahrenheitLink = document.querySelector("#imperial");
+celsciusLink.addEventListener("click", getCelscius);
+fahrenheitLink.addEventListener("click", getFahrenheit);

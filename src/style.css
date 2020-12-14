@@ -63,16 +63,6 @@ div.row h3 {
   text-transform: capitalize;
 }
 
-div.fri,
-.sat,
-.sun,
-.mon,
-.tue {
-  margin: 0 auto;
-  display: block;
-  color: white;
-  font-size: 29px;
-}
 .btn {
   margin: 5px 2px;
   background: #a6c1ee;
@@ -82,9 +72,8 @@ div.fri,
 }
 .future-weather {
   color: #ffff;
-  text-align: left;
-  font-size: 30px;
-  margin: 25px 0 5px;
+  text-align: center;
+  font-size: 20px;
 }
 
 .weather-details {
