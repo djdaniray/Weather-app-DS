@@ -80,13 +80,11 @@ function temperature(response) {
   );
   icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
-
+let fahrenheitTemp = temperature.currentTemp;
 let currentCity = "Atlanta";
 let apiKey = "037d9b04c685370b3f28aaa4b1482345";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
 axios.get(apiUrl).then(temperature);
-
-let fahrenheitTemp = null;
 
 //Search Bar city
 function showTemp(response) {
@@ -132,9 +130,11 @@ cityInput.addEventListener("submit", citySearch);
 // Clicking F and C temperatures
 
 function showCelscius(response) {
+  let celsciusTemp = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
 
+  celsciusTemp.innerHTML = Math.round(response.data.main.temp);
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°C | Lo ${Math.round(response.data.main.temp_min)}°C`;
@@ -144,12 +144,10 @@ function showCelscius(response) {
 function getCelscius(event) {
   event.preventDefault();
 
-  let celsciusTemp = document.querySelector("#temp");
   let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
   axios.get(apiUrlMetric).then(showCelscius);
   celsciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
-  celsciusTemp.innerHTML = Math.round((fahrenheitTemp - 32) * (5 / 9));
 }
 function showFahrenheit(response) {
   let h3 = document.querySelector("#temp");
