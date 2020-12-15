@@ -45,7 +45,16 @@ liTime.innerHTML = `Last updated ${hour}:${minutes}`;
 liDay.innerHTML = `${day}`;
 
 function formatHours(timestamp) {
-  return `${hour}:00`;
+  let date = new Date(timestamp);
+  let hour = now.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hour}:${minutes}`;
 }
 
 //Current weather for Atlanta
@@ -211,11 +220,9 @@ function showForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
-
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
-
-    forecastElement.innerHTML = forecastElement.innerHTML += `<div class="col-2">
+    forecastElement.innerHTML += `<div class="col-2">
       <h5> ${formatHours(forecast.dt * 1000)} </h5>
       <img src="http://openweathermap.org/img/wn/${
         forecast.weather[0].icon
