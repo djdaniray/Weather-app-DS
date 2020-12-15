@@ -50,9 +50,12 @@ function formatHours(timestamp) {
 
 //Current weather for Atlanta
 function temperature(response) {
+  console.log(response.data);
+  let city = document.querySelector("h1");
   let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
+  city.innerHTML = `Currently ${response.data.name}`;
   currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
@@ -70,7 +73,14 @@ function temperature(response) {
   );
   icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
-
+function search(city) {
+  let apiKey = "037d9b04c685370b3f28aaa4b1482345";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(temperature);
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrlForecast).then(showForecast);
+}
+search("Moscow");
 //Search Bar city
 function showTemp(response) {
   let currentTemp = document.querySelector("#temp");
@@ -107,6 +117,8 @@ function citySearch(event) {
   axios.get(apiUrl).then(showTemp);
   axios.get(apiUrlForecast).then(showForecast);
 }
+let cityInput = document.querySelector("#search-form");
+cityInput.addEventListener("submit", citySearch);
 
 // Clicking F and C temperatures
 
@@ -216,15 +228,8 @@ function showForecast(response) {
       `;
   }
 }
-let currentCity = "Atlanta";
-let apiKey = "037d9b04c685370b3f28aaa4b1482345";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
-axios.get(apiUrl).then(temperature);
-let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial`;
-axios.get(apiUrlForecast).then(showForecast);
-
-let cityInput = document.querySelector("#search-form");
-cityInput.addEventListener("submit", citySearch);
 
 let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
+
+///test section
