@@ -203,6 +203,9 @@ function currentLocationBtn(event) {
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
+let button = document.querySelector("#current-location");
+button.addEventListener("click", currentLocationBtn);
+
 //forecast
 function showForecast(response) {
   let forecastElement = document.querySelector("#forecast");
@@ -226,9 +229,6 @@ function showForecast(response) {
       `;
   }
 }
-
-let button = document.querySelector("#current-location");
-button.addEventListener("click", currentLocationBtn);
 
 let fahrenheitTemp = null;
 search("Moscow");
