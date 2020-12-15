@@ -79,7 +79,7 @@ div.future-weather {
 
 .weather-details {
   text-align: Left;
-  margin: -3px 2px 10px 25px;
+  margin: -3px 2px 10px 10px;
 }
 .active {
   color: #ab47bc;
