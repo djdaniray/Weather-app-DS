@@ -230,6 +230,5 @@ function showForecast(response) {
 let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
 
-///test section
 let fahrenheitTemp = null;
 search("Moscow");
