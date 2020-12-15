@@ -164,6 +164,7 @@ fahrenheitLink.addEventListener("click", getFahrenheit);
 
 //Current location button
 function btnTemp(position) {
+  fahrenheitTemp = Math.round(position.data.main.temp);
   let city = document.querySelector("h1");
   let btn = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
@@ -172,7 +173,7 @@ function btnTemp(position) {
   let windElement = document.querySelector("#wind");
   let icon = document.querySelector("#icon");
   city.innerHTML = `Currently ${position.data.name}`;
-  btn.innerHTML = `${Math.round(position.data.main.temp)}`;
+  btn.innerHTML = `${Math.round(position.data.main.temp)}°`;
   minTemp.innerHTML = `Hi ${Math.round(
     position.data.main.temp_max
   )}°F | Lo ${Math.round(position.data.main.temp_min)}°F`;
@@ -202,6 +203,9 @@ function currentLocationBtn(event) {
   navigator.geolocation.getCurrentPosition(handlePosition);
 }
 
+let button = document.querySelector("#current-location");
+button.addEventListener("click", currentLocationBtn);
+
 //forecast
 function showForecast(response) {
   let forecastElement = document.querySelector("#forecast");
@@ -226,9 +230,5 @@ function showForecast(response) {
   }
 }
 
-let button = document.querySelector("#current-location");
-button.addEventListener("click", currentLocationBtn);
-
-///test section
 let fahrenheitTemp = null;
 search("Moscow");
