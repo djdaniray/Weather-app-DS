@@ -50,10 +50,13 @@ function formatHours(timestamp) {
 
 //Current weather for Atlanta
 function temperature(response) {
+  fahrenheitTemp = Math.round(response.data.main.temp);
+  let city = document.querySelector("h1");
   let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
-  currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  city.innerHTML = `Currently ${response.data.name}`;
+  currentTemp.innerHTML = `${fahrenheitTemp}°`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -70,13 +73,21 @@ function temperature(response) {
   );
   icon.setAttribute("alt", `${response.data.weather[0].description}`);
 }
+function search(city) {
+  let apiKey = "037d9b04c685370b3f28aaa4b1482345";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(temperature);
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
+  axios.get(apiUrlForecast).then(showForecast);
+}
 
 //Search Bar city
 function showTemp(response) {
+  fahrenheitTemp = Math.round(response.data.main.temp);
   let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
-  currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  currentTemp.innerHTML = `${fahrenheitTemp}°`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )} | Lo ${Math.round(response.data.main.temp_min)}`;
@@ -107,15 +118,14 @@ function citySearch(event) {
   axios.get(apiUrl).then(showTemp);
   axios.get(apiUrlForecast).then(showForecast);
 }
+let cityInput = document.querySelector("#search-form");
+cityInput.addEventListener("submit", citySearch);
 
 // Clicking F and C temperatures
 
 function showCelscius(response) {
-  let celsciusTemp = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
-
-  celsciusTemp.innerHTML = Math.round(response.data.main.temp);
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°C | Lo ${Math.round(response.data.main.temp_min)}°C`;
@@ -124,18 +134,15 @@ function showCelscius(response) {
 
 function getCelscius(event) {
   event.preventDefault();
-
-  let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrlMetric).then(showCelscius);
+  let celsciusTemp = document.querySelector("#temp");
+  celsciusTemp.innerHTML = `${Math.round((fahrenheitTemp - 32) * (5 / 9))}°`;
   celsciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
 function showFahrenheit(response) {
-  console.log(response.data);
-  let h3 = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
-  h3.innerHTML = Math.round(response.data.main.temp);
+
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -143,7 +150,9 @@ function showFahrenheit(response) {
 }
 function getFahrenheit(event) {
   event.preventDefault();
-  axios.get(apiUrl).then(showFahrenheit);
+  let tempElement = document.querySelector("#temp");
+  tempElement.innerHTML = `${Math.round(fahrenheitTemp)}°`;
+
   celsciusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
@@ -216,15 +225,10 @@ function showForecast(response) {
       `;
   }
 }
-let currentCity = "Atlanta";
-let apiKey = "037d9b04c685370b3f28aaa4b1482345";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=imperial`;
-axios.get(apiUrl).then(temperature);
-let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${currentCity}&appid=${apiKey}&units=imperial`;
-axios.get(apiUrlForecast).then(showForecast);
-
-let cityInput = document.querySelector("#search-form");
-cityInput.addEventListener("submit", citySearch);
 
 let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
+
+///test section
+let fahrenheitTemp = null;
+search("Moscow");
