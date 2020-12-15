@@ -231,4 +231,4 @@ function showForecast(response) {
 }
 
 let fahrenheitTemp = null;
-search("Moscow");
+search("Atlanta");
