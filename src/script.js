@@ -98,12 +98,14 @@ function citySearch(event) {
   let cityName = document.querySelector("#city-input-value");
   let apiKey = "037d9b04c685370b3f28aaa4b1482345";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=${apiKey}&units=imperial`;
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName.value}&appid=${apiKey}&units=imperial`;
   let h1 = document.querySelector("h1");
   h1.innerHTML = `Currently ${cityName.value}`;
   celsciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 
   axios.get(apiUrl).then(showTemp);
+  axios.get(apiUrlForecast).then(showForecast);
 }
 
 // Clicking F and C temperatures
