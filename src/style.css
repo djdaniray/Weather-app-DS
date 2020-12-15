@@ -57,7 +57,7 @@ h3 {
   font-size: 70px;
   padding: 5px;
   line-height: 15px;
-  margin-right: 30px;
+  margin-right: 10px;
 }
 #descrip {
   text-transform: capitalize;
@@ -93,4 +93,6 @@ div.future-weather {
   color: white;
   text-align: center;
   width: 95%;
+}
+.clearfix {
 }

@@ -46,7 +46,7 @@ liDay.innerHTML = `${day}`;
 
 function formatHours(timestamp) {
   let date = new Date(timestamp);
-  let hour = now.getHours();
+  let hour = date.getHours();
   if (hour < 10) {
     hour = `0${hour}`;
   }
@@ -222,6 +222,7 @@ function showForecast(response) {
   let forecast = null;
   for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
+    console.log(forecast);
     forecastElement.innerHTML += `<div class="col-2">
       <h5> ${formatHours(forecast.dt * 1000)} </h5>
       <img src="http://openweathermap.org/img/wn/${
