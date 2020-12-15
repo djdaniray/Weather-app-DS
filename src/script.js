@@ -50,14 +50,13 @@ function formatHours(timestamp) {
 
 //Current weather for Atlanta
 function temperature(response) {
-  fahrenheitTemp = response.data.main.temp;
-  console.log(fahrenheitTemp);
+  fahrenheitTemp = Math.round(response.data.main.temp);
   let city = document.querySelector("h1");
   let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
   city.innerHTML = `Currently ${response.data.name}`;
-  currentTemp.innerHTML = `${Math.round(fahrenheitTemp)}`;
+  currentTemp.innerHTML = `${fahrenheitTemp}°`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -84,10 +83,11 @@ function search(city) {
 
 //Search Bar city
 function showTemp(response) {
+  fahrenheitTemp = Math.round(response.data.main.temp);
   let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
-  currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  currentTemp.innerHTML = `${fahrenheitTemp}°`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )} | Lo ${Math.round(response.data.main.temp_min)}`;
@@ -135,15 +135,14 @@ function showCelscius(response) {
 function getCelscius(event) {
   event.preventDefault();
   let celsciusTemp = document.querySelector("#temp");
-  celsciusTemp.innerHTML = Math.round((fahrenheitTemp - 32) * (5 / 9));
+  celsciusTemp.innerHTML = `${Math.round((fahrenheitTemp - 32) * (5 / 9))}°`;
   celsciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
 function showFahrenheit(response) {
-  let h3 = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
-  h3.innerHTML = Math.round(response.data.main.temp);
+
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -152,7 +151,7 @@ function showFahrenheit(response) {
 function getFahrenheit(event) {
   event.preventDefault();
   let tempElement = document.querySelector("#temp");
-  tempElement.innerHTML = Math.round(fahrenheitTemp);
+  tempElement.innerHTML = `${Math.round(fahrenheitTemp)}°`;
 
   celsciusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
