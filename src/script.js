@@ -50,13 +50,14 @@ function formatHours(timestamp) {
 
 //Current weather for Atlanta
 function temperature(response) {
-  console.log(response.data);
+  fahrenheitTemp = response.data.main.temp;
+  console.log(fahrenheitTemp);
   let city = document.querySelector("h1");
   let currentTemp = document.querySelector("#temp");
   let minTemp = document.querySelector("#im-hi-lo");
   let icon = document.querySelector("#icon");
   city.innerHTML = `Currently ${response.data.name}`;
-  currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  currentTemp.innerHTML = `${Math.round(fahrenheitTemp)}`;
   minTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°F | Lo ${Math.round(response.data.main.temp_min)}°F`;
@@ -80,7 +81,7 @@ function search(city) {
   let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrlForecast).then(showForecast);
 }
-search("Moscow");
+
 //Search Bar city
 function showTemp(response) {
   let currentTemp = document.querySelector("#temp");
@@ -123,11 +124,8 @@ cityInput.addEventListener("submit", citySearch);
 // Clicking F and C temperatures
 
 function showCelscius(response) {
-  let celsciusTemp = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
-
-  celsciusTemp.innerHTML = Math.round(response.data.main.temp);
   dayTemp.innerHTML = `Hi ${Math.round(
     response.data.main.temp_max
   )}°C | Lo ${Math.round(response.data.main.temp_min)}°C`;
@@ -136,14 +134,12 @@ function showCelscius(response) {
 
 function getCelscius(event) {
   event.preventDefault();
-
-  let apiUrlMetric = `https://api.openweathermap.org/data/2.5/weather?q=${currentCity}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrlMetric).then(showCelscius);
+  let celsciusTemp = document.querySelector("#temp");
+  celsciusTemp.innerHTML = Math.round((fahrenheitTemp - 32) * (5 / 9));
   celsciusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
 function showFahrenheit(response) {
-  console.log(response.data);
   let h3 = document.querySelector("#temp");
   let dayTemp = document.querySelector("#im-hi-lo");
   let windElement = document.querySelector("#wind");
@@ -155,7 +151,9 @@ function showFahrenheit(response) {
 }
 function getFahrenheit(event) {
   event.preventDefault();
-  axios.get(apiUrl).then(showFahrenheit);
+  let tempElement = document.querySelector("#temp");
+  tempElement.innerHTML = Math.round(fahrenheitTemp);
+
   celsciusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
 }
@@ -233,3 +231,5 @@ let button = document.querySelector("#current-location");
 button.addEventListener("click", currentLocationBtn);
 
 ///test section
+let fahrenheitTemp = null;
+search("Moscow");
